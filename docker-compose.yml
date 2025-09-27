@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # Base de données MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: stock_management_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: stock_management
+      MYSQL_USER: stockuser
+      MYSQL_PASSWORD: stockpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    networks:
+      - stock_network
+
+  # Backend Node.js
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: stock_management_backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DB_HOST: mysql
+      DB_USER: stockuser
+      DB_PASSWORD: stockpassword
+      DB_NAME: stock_management
+      JWT_SECRET: your_super_secret_jwt_key_here
+      JWT_EXPIRE: 7d
+      PORT: 5000
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    networks:
+      - stock_network
+
+  # Frontend React
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: stock_management_frontend
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: http://localhost:5000/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - stock_network
+
+volumes:
+  mysql_data:
+
+networks:
+  stock_network:
+    driver: bridge

@@ -1,0 +1,47 @@
+# CONFIGURATION EMAIL POUR STOCK SHOP MALI
+
+## Variables d'environnement à ajouter dans votre système :
+
+export EMAIL_USER=votre-email@gmail.com
+export EMAIL_PASS=votre-mot-de-passe-app
+
+## Instructions de configuration :
+
+1. **Créer un compte Gmail** (ou utiliser un existant)
+   - Email: votre-email@gmail.com
+
+2. **Activer l'authentification à deux facteurs**
+   - Aller dans Paramètres Google > Sécurité
+   - Activer la vérification en 2 étapes
+
+3. **Générer un mot de passe d'application**
+   - Aller dans Paramètres Google > Sécurité > Mots de passe des applications
+   - Sélectionner "Autre" et nommer "Stock Shop Mali"
+   - Copier le mot de passe généré (16 caractères)
+
+4. **Configurer les variables**
+   - Remplacer EMAIL_USER par votre email
+   - Remplacer EMAIL_PASS par le mot de passe d'application
+
+5. **Exemple d'utilisation dans le terminal :**
+   ```bash
+   export EMAIL_USER=stockshop@gmail.com
+   export EMAIL_PASS=abcd efgh ijkl mnop
+   cd /Users/moussaabdoulayeniambele/Documents/llm
+   npm start
+   ```
+
+## Fonctionnalités email activées :
+
+✅ Email de nouvelle commande → Admins/Employés
+✅ Email de validation → Client (si email fourni)
+✅ Email de facture → Client après livraison
+
+## Test des emails :
+
+Une fois configuré, testez en :
+1. Passant une commande avec un email
+2. Validant la commande depuis l'admin
+3. Marquant la commande comme livrée
+
+Les emails seront envoyés automatiquement ! 🚀
