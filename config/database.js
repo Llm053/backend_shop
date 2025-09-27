@@ -5,10 +5,10 @@ dotenv.config({ path: './config.env' });
 
 // Configuration de la connexion à la base de données
 const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'stock_management',
+  host: process.env.DB_HOST || 'sql8.freesqldatabase.com',
+  user: process.env.DB_USER || 'sql8800065',
+  password: process.env.DB_PASSWORD || 'Q1cwNJ81eu',
+  database: process.env.DB_NAME || 'sql8800065',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
